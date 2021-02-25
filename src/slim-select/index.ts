@@ -190,7 +190,7 @@ export default class SlimSelect {
     const isValid = validateData(data)
     if (!isValid) { console.error('Validation problem on: #' + this.select.element.id); return } // If data passed in is not valid DO NOT parse, set and render
 
-    const newData = JSON.parse(JSON.stringify(data))
+    let newData = JSON.parse(JSON.stringify(data))
     const selected = this.data.getSelected()
 
     // Check newData to make sure value is set
@@ -217,6 +217,10 @@ export default class SlimSelect {
             delete newData[i]
           }
         }
+
+        const temp = []
+        for(let i of newData) i && temp.push(i)
+        newData = temp
 
         // Add placeholder if it doesnt already have one
         let hasPlaceholder = false
